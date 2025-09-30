@@ -44,9 +44,11 @@
             }
             .print-view {
                 display: block;
-                white-space: pre-wrap;
+                /* Preserve white-space/line breaks from the textarea */
+                white-space: pre-wrap; 
                 word-wrap: break-word;
                 font-family: 'Inter', sans-serif;
+                font-size: 0.875rem; /* text-sm */
             }
             .page-break {
                 page-break-after: always;
@@ -99,7 +101,7 @@
             <h2 class="text-2xl font-semibold mb-4 text-center">Project Objective & Overall Scope</h2>
             <p class="text-gray-600 mb-4">Provide a high-level summary of the client's goals and the project's overall scope.</p>
             <textarea name="overall-scope" rows="5" placeholder="Example: The client wants to fully renovate their master bathroom to a modern aesthetic. This includes converting the tub to a walk-in shower, replacing the toilet, and updating the sink and fixtures." class="no-print"></textarea>
-            <div class="print-view" id="overall-scope-print"></div>
+            <div class="print-view font-mono bg-white p-2 border mt-1" id="overall-scope-print"></div>
         </section>
 
         <hr class="my-8 border-gray-300">
@@ -108,7 +110,7 @@
             <h2 class="text-2xl font-semibold mb-6 text-center">Exclusions & Notes</h2>
             <p class="text-gray-600 mb-4">List anything that is explicitly not included in the bid, or any other important notes to remember about the project.</p>
             <textarea name="exclusions-notes" rows="5" placeholder="Example: Exclusions: Any structural changes to the home's framing. Notes: Client mentioned they may want to upgrade to a smart thermostat in the future." class="no-print"></textarea>
-            <div class="print-view" id="exclusions-notes-print"></div>
+            <div class="print-view font-mono bg-white p-2 border mt-1" id="exclusions-notes-print"></div>
         </section>
 
         <hr class="my-8 border-gray-300">
@@ -116,8 +118,8 @@
         <section class="mb-8">
             <h2 class="text-2xl font-semibold mb-6 text-center">Customer Needs & Site Notes</h2>
             <p class="text-gray-600 mb-4">Record details about the client's style preferences, any challenges with the site, or other important observations.</p>
-            <textarea name="customer-notes" rows="5" placeholder="Example: Client prefers a minimalist, modern aesthetic with matte black fixtures. Access to the back yard is limited due to a narrow gate."></textarea>
-            <div class="print-view" id="customer-notes-print"></div>
+            <textarea name="customer-notes" rows="5" placeholder="Example: Client prefers a minimalist, modern aesthetic with matte black fixtures. Access to the back yard is limited due to a narrow gate." class="no-print"></textarea>
+            <div class="print-view font-mono bg-white p-2 border mt-1" id="customer-notes-print"></div>
         </section>
 
         <hr class="my-8 border-gray-300">
@@ -125,23 +127,42 @@
         <section class="mb-8">
             <h2 class="text-2xl font-semibold mb-6 text-center">Project & Bid Details</h2>
             <p class="text-gray-600 mb-4">Break down the project into specific line items with titles, detailed scope, and estimated costs. </p>
-            
+
             <div id="project-container" class="space-y-6">
-                <!-- Project 1 (The initial project field) -->
-                <div class="project-field-group">
-                    <h3 class="text-lg font-bold mb-2">Project 1</h3>
-                    <div class="space-y-2">
-                        <input type="text" name="project1-title" placeholder="Title (e.g., Tub-to-Walk-in Shower Conversion)">
-                        <textarea name="project1-scope" rows="5" placeholder="Scope (e.g., Demolition of existing tub, installation of a new shower pan and surround, new fixtures, and plumbing adjustments.)" class="no-print"></textarea>
-                        <div class="print-view" id="project1-scope-print"></div>
-                        <input type="text" name="project1-hours" placeholder="Estimated Hours (e.g., 20)">
-                        <input type="text" name="project1-labor-cost" placeholder="Estimated Labor Cost (e.g., 1500, numbers only)">
-                        <input type="text" name="project1-materials-cost" placeholder="Estimated Materials Cost (e-g, 2500, numbers only)">
-                        <input type="text" name="project1-price" placeholder="Price (e.g., 4155.77, numbers only)">
+                <div class="project-field-group p-4 border rounded-lg bg-gray-50">
+                    <h3 class="text-lg font-bold mb-3 text-indigo-700">Project 1</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label for="project1-title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                            <input type="text" id="project1-title" name="project1-title" placeholder="e.g., Tub-to-Walk-in Shower Conversion">
+                        </div>
+                        <div>
+                            <label for="project1-scope" class="block text-sm font-medium text-gray-700 mb-1">Scope Details</label>
+                            <textarea id="project1-scope" name="project1-scope" rows="5" placeholder="e.g., Demolition of existing tub, installation of a new shower pan and surround, new fixtures, and plumbing adjustments." class="no-print"></textarea>
+                            <div class="print-view font-mono bg-white p-2 border mt-1" id="project1-scope-print"></div>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <div>
+                                <label for="project1-hours" class="block text-sm font-medium text-gray-700 mb-1">Est. Hours</label>
+                                <input type="text" id="project1-hours" name="project1-hours" placeholder="e.g., 20">
+                            </div>
+                            <div>
+                                <label for="project1-labor-cost" class="block text-sm font-medium text-gray-700 mb-1">Est. Labor Cost ($)</label>
+                                <input type="text" id="project1-labor-cost" name="project1-labor-cost" placeholder="e.g., 1500 (numbers only)">
+                            </div>
+                            <div>
+                                <label for="project1-materials-cost" class="block text-sm font-medium text-gray-700 mb-1">Est. Materials Cost ($)</label>
+                                <input type="text" id="project1-materials-cost" name="project1-materials-cost" placeholder="e.g., 2500 (numbers only)">
+                            </div>
+                            <div>
+                                <label for="project1-price" class="block text-sm font-medium text-gray-700 mb-1">Final Price ($)</label>
+                                <input type="text" id="project1-price" name="project1-price" placeholder="e.g., 4155.77 (numbers only)">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="mt-8 text-center no-print">
                 <button onclick="addProjectField()" class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     Add Another Project
@@ -186,11 +207,10 @@
                     Save as PDF
                 </button>
             </div>
-            
+
             <div class="no-print bg-gray-100 p-6 rounded-lg">
                 <p class="font-bold text-gray-700 mb-2">How to Save Your Proposal as a PDF:</p>
-                
-                <!-- For Desktop -->
+
                 <p class="font-semibold text-gray-700">For Desktop/Laptop Users:</p>
                 <ol class="list-decimal list-inside mt-1 text-sm text-gray-600 space-y-1">
                     <li>Click the **Save as PDF** button above.</li>
@@ -199,12 +219,11 @@
                     <li>Email the saved PDF to **TheHollandSeven@gmail.com**.</li>
                 </ol>
 
-                <!-- For Mobile -->
                 <p class="font-semibold text-gray-700 mt-4">For Android or iPhone Users:</p>
                 <ol class="list-decimal list-inside mt-1 text-sm text-gray-600 space-y-1">
                     <li>Click the **Save as PDF** button above.</li>
                     <li>In the print dialog, tap the dropdown menu to select a different printer or save option.</li>
-                    <li><li>Choose **"Save as PDF"** from the list of options.</li>
+                    <li>Choose **"Save as PDF"** from the list of options.</li>
                     <li>Save the file to your device.</li>
                     <li>Email the saved PDF to **TheHollandSeven@gmail.com**.</li>
                 </ol>
@@ -222,6 +241,7 @@
                     textarea.style.height = textarea.scrollHeight + 'px';
                     const printViewDiv = document.getElementById(textarea.name + '-print');
                     if (printViewDiv) {
+                        // Crucial: Update the hidden print-view div with the textarea's content
                         printViewDiv.textContent = textarea.value;
                     }
                 }
@@ -230,29 +250,50 @@
                 resize();
             });
         }
-        
+
         function addProjectField() {
             projectCounter++;
             const projectContainer = document.getElementById('project-container');
             const newProjectDiv = document.createElement('div');
-            newProjectDiv.classList.add('project-field-group');
-            
+            // Added styling for separation and background color
+            newProjectDiv.classList.add('project-field-group', 'p-4', 'border', 'rounded-lg', 'bg-gray-50', 'mt-6');
+
             const newProjectHTML = `
-                <h3 class="text-lg font-bold mb-2">Project ${projectCounter}</h3>
-                <div class="space-y-2">
-                    <input type="text" name="project${projectCounter}-title" placeholder="Title">
-                    <textarea name="project${projectCounter}-scope" rows="5" placeholder="Scope" class="no-print"></textarea>
-                    <div class="print-view" id="project${projectCounter}-scope-print"></div>
-                    <input type="text" name="project${projectCounter}-hours" placeholder="Estimated Hours">
-                    <input type="text" name="project${projectCounter}-labor-cost" placeholder="Estimated Labor Cost">
-                    <input type="text" name="project${projectCounter}-materials-cost" placeholder="Estimated Materials Cost">
-                    <input type="text" name="project${projectCounter}-price" placeholder="Price (numbers only)">
+                <h3 class="text-lg font-bold mb-3 text-indigo-700">Project ${projectCounter}</h3>
+                <div class="space-y-3">
+                    <div>
+                        <label for="project${projectCounter}-title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                        <input type="text" id="project${projectCounter}-title" name="project${projectCounter}-title" placeholder="Title">
+                    </div>
+                    <div>
+                        <label for="project${projectCounter}-scope" class="block text-sm font-medium text-gray-700 mb-1">Scope Details</label>
+                        <textarea id="project${projectCounter}-scope" name="project${projectCounter}-scope" rows="5" placeholder="Scope" class="no-print"></textarea>
+                        <div class="print-view font-mono bg-white p-2 border mt-1" id="project${projectCounter}-scope-print"></div>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <div>
+                            <label for="project${projectCounter}-hours" class="block text-sm font-medium text-gray-700 mb-1">Est. Hours</label>
+                            <input type="text" id="project${projectCounter}-hours" name="project${projectCounter}-hours" placeholder="Estimated Hours">
+                        </div>
+                        <div>
+                            <label for="project${projectCounter}-labor-cost" class="block text-sm font-medium text-gray-700 mb-1">Est. Labor Cost ($)</label>
+                            <input type="text" id="project${projectCounter}-labor-cost" name="project${projectCounter}-labor-cost" placeholder="Estimated Labor Cost">
+                        </div>
+                        <div>
+                            <label for="project${projectCounter}-materials-cost" class="block text-sm font-medium text-gray-700 mb-1">Est. Materials Cost ($)</label>
+                            <input type="text" id="project${projectCounter}-materials-cost" name="project${projectCounter}-materials-cost" placeholder="Estimated Materials Cost">
+                        </div>
+                        <div>
+                            <label for="project${projectCounter}-price" class="block text-sm font-medium text-gray-700 mb-1">Final Price ($)</label>
+                            <input type="text" id="project${projectCounter}-price" name="project${projectCounter}-price" placeholder="Price (numbers only)">
+                        </div>
+                    </div>
                 </div>
             `;
             newProjectDiv.innerHTML = newProjectHTML;
             projectContainer.appendChild(newProjectDiv);
-            
-            // Re-run the resize logic for all textareas
+
+            // Re-run the resize logic for all textareas, including the new one
             resizeTextareas();
         }
 
